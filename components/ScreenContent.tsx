@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 
 import { EditScreenInfo } from './EditScreenInfo';
 
@@ -11,15 +11,22 @@ type ScreenContentProps = {
 export const ScreenContent = ({ title, path, children }: ScreenContentProps) => {
   return (
     <View className={styles.container}>
-      <Text className={styles.title}>{title}</Text>
-      <View className={styles.separator} />
-      <EditScreenInfo path={path} />
-      {children}
+      <Text className={styles.title}>AHMEeeeeeeeeeeeeeeeeeeeeeeT</Text>
+      <View>
+      <Button
+        title="Click me"
+        onPress={() => {
+          console.log('Button clicked!');
+        }}    
+      />
+      </View>
+        
     </View>
+    
   );
 };
 const styles = {
   container: `items-center flex-1 justify-center`,
   separator: `h-[1px] my-7 w-4/5 bg-gray-200`,
-  title: `text-xl font-bold`,
+  title: `text-xl font-bold colors-blue-800`,
 };
