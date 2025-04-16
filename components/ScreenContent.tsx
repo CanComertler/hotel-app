@@ -1,6 +1,6 @@
 import { Button, Text, View } from 'react-native';
 
-import { EditScreenInfo } from './EditScreenInfo';
+import { EditScreenInfo } from './FavoriteCard';
 
 type ScreenContentProps = {
   title: string;
