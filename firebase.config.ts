@@ -2,20 +2,19 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
-import { getPerformance } from "firebase/performance";
+import { FIREBASE_API_KEY, FIREBASE_AUTH_DOMAIN, FIREBASE_MEASUREMENT_ID, FIREBASE_MESSAGING_SENDER_ID, FIREBASE_PROJECT_ID, FIREBASE_STORAGE_BUCKET } from "@env";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCemzVs6ZFsh6URkhknSQJVKV9trICBsc0",
-  authDomain: "hotel-app-9478f.firebaseapp.com",
-  projectId: "hotel-app-9478f",
-  storageBucket: "hotel-app-9478f.firebasestorage.app",
-  messagingSenderId: "871034194331",
-  appId: "1:871034194331:web:34f9d5bb8bbc7ba891793e"
+  apiKey: FIREBASE_API_KEY,
+  authDomain: FIREBASE_AUTH_DOMAIN, 
+  projectId: FIREBASE_PROJECT_ID,
+  storageBucket:  FIREBASE_STORAGE_BUCKET, 
+  messagingSenderId: FIREBASE_MESSAGING_SENDER_ID, 
+  appId: FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

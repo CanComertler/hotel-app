@@ -73,7 +73,7 @@ export default function Favorite() {
 
   if (hotels.length === 0) {
     return (
-      <SafeAreaView className="flex-1 justify-center items-center bg-white">
+      <SafeAreaView className="flex-1 justify-center items-center bg-white mt-4">
         <Text className="text-gray-500 text-lg">Henüz favori oteliniz yok.</Text>
       </SafeAreaView>
     );
