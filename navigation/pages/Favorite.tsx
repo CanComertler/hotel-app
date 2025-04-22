@@ -4,6 +4,7 @@ import {
   ActivityIndicator,
   SafeAreaView,
   Text,
+  StyleSheet,
 } from "react-native";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
@@ -73,14 +74,14 @@ export default function Favorite() {
 
   if (hotels.length === 0) {
     return (
-      <SafeAreaView className="flex-1 justify-center items-center bg-white mt-4">
-        <Text className="text-gray-500 text-lg">Henüz favori oteliniz yok.</Text>
+      <SafeAreaView className=" justify-center items-center bg-white mt-4">
+        <Text>Henüz favori oteliniz yok.</Text>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100 px-4 pt-4">
+    <SafeAreaView className="flex-1 bg-red-100 px-4 pt-4">
       <FlatList
         data={hotels}
         keyExtractor={(item) => item.id.toString()}
@@ -92,3 +93,5 @@ export default function Favorite() {
     </SafeAreaView>
   );
 }
+
+
