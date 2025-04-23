@@ -67,7 +67,7 @@ export default function Favorite() {
     return (
       <SafeAreaView className="flex-1 justify-center items-center bg-white">
         <ActivityIndicator size="large" color="#e32f45" />
-        <Text className="mt-2 text-gray-500">Favoriler yükleniyor...</Text>
+        <Text style={styles.alert}>Favoriler yükleniyor...</Text>
       </SafeAreaView>
     );
   }
@@ -75,13 +75,13 @@ export default function Favorite() {
   if (hotels.length === 0) {
     return (
       <SafeAreaView className=" justify-center items-center bg-white mt-4">
-        <Text>Henüz favori oteliniz yok.</Text>
+        <Text style={styles.alert}>Henüz favori oteliniz yok.</Text>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-red-100 px-4 pt-4">
+    <SafeAreaView style={styles.list}>
       <FlatList
         data={hotels}
         keyExtractor={(item) => item.id.toString()}
@@ -95,3 +95,15 @@ export default function Favorite() {
 }
 
 
+const styles = StyleSheet.create({
+  alert: {
+    marginTop: 50,
+    textAlign: "center",
+    fontSize: 22,
+  },
+  list: {
+    flex: 1,
+    padding: 10,
+    marginTop: 10,
+  }   
+});
