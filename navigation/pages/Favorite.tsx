@@ -12,9 +12,6 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase.config";
 import { FavoriteCard } from "../../components/FavoriteCard";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import type { SearchStackParamList } from "../SearchStack";
 
 type Hotel = {
   id: number;
@@ -31,9 +28,6 @@ export default function Favorite() {
   );
   const [hotels, setHotels] = useState<Hotel[]>([]);
   const [loading, setLoading] = useState(true);
-
-  const navigation =
-    useNavigation<NativeStackNavigationProp<SearchStackParamList>>();
 
   const fetchFavoriteHotels = async () => {
     try {
@@ -65,7 +59,7 @@ export default function Favorite() {
 
   if (loading) {
     return (
-      <SafeAreaView className="flex-1 justify-center items-center bg-white">
+      <SafeAreaView style={styles.centered}>
         <ActivityIndicator size="large" color="#e32f45" />
         <Text style={styles.alert}>Favoriler yükleniyor...</Text>
       </SafeAreaView>
@@ -74,7 +68,7 @@ export default function Favorite() {
 
   if (hotels.length === 0) {
     return (
-      <SafeAreaView className=" justify-center items-center bg-white mt-4">
+      <SafeAreaView style={styles.centered}>
         <Text style={styles.alert}>Henüz favori oteliniz yok.</Text>
       </SafeAreaView>
     );
@@ -85,15 +79,12 @@ export default function Favorite() {
       <FlatList
         data={hotels}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <FavoriteCard {...item} navigation={navigation} />
-        )}
+        renderItem={({ item }) => <FavoriteCard {...item} />}
         showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
   );
 }
-
 
 const styles = StyleSheet.create({
   alert: {
@@ -105,5 +96,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     marginTop: 10,
-  }   
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+  },
 });

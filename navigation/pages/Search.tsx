@@ -1,11 +1,14 @@
-import { View, Text, FlatList, ActivityIndicator, StyleSheet } from "react-native";
+import { View, Text, FlatList, ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase.config";
 import { HotelCard } from "../../components/HotelCard";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { SearchStackParamList } from "../SearchStack";
 
 type Hotel = {
-  id: number;
+  id: string;
   name: string;
   city: string;
   rating: number;
@@ -17,11 +20,13 @@ export default function Search() {
   const [hotels, setHotels] = useState<Hotel[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const navigation = useNavigation<NativeStackNavigationProp<SearchStackParamList>>();
+
   const fetchHotels = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, "hotels"));
       const data: Hotel[] = querySnapshot.docs.map((doc) => ({
-        id: doc.data().id,
+        id: doc.id,
         name: doc.data().name,
         city: doc.data().city,
         rating: doc.data().rating,
@@ -55,9 +60,12 @@ export default function Search() {
         data={hotels}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <View style={styles.shadowWrapper}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("HotelDetail", { id: item.id })}
+            style={styles.shadowWrapper}
+          >
             <HotelCard {...item} />
-          </View>
+          </TouchableOpacity>
         )}
         showsVerticalScrollIndicator={false}
         numColumns={2}
@@ -78,12 +86,11 @@ const styles = StyleSheet.create({
   shadowWrapper: {
     flex: 1,
     margin: 8,
-    // Shadow ayarları: Kartın dışındaki container'a tanımlandığı için overflow kullanmıyoruz
     shadowColor: "#e32f45",
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.6,
     shadowRadius: 4,
-    elevation: 6, // Android için
+    elevation: 6,
   },
   loadingContainer: {
     flex: 1,

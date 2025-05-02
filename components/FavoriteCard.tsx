@@ -9,10 +9,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { Star } from "lucide-react-native";
 import { useDispatch } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { removeFromFavorites } from "../redux/favoritesSlice";
-import type { SearchStackParamList } from "../navigation/SearchStack";
 
 type Props = {
   id: number;
@@ -23,8 +20,6 @@ type Props = {
   imageUrl: string;
 };
 
-type NavigationProp = NativeStackNavigationProp<SearchStackParamList, "HotelDetail">;
-
 export const FavoriteCard = ({
   id,
   name,
@@ -34,14 +29,9 @@ export const FavoriteCard = ({
   imageUrl,
 }: Props) => {
   const dispatch = useDispatch();
-  const navigation = useNavigation<NavigationProp>();
-
-  const handleNavigate = () => {
-    navigation.navigate("HotelDetail", { id: id.toString() });
-  };
 
   return (
-    <TouchableOpacity style={styles.card} onPress={handleNavigate}>
+    <View style={styles.card}>
       <Image source={{ uri: imageUrl }} style={styles.image} />
 
       <View style={styles.infoContainer}>
@@ -62,7 +52,7 @@ export const FavoriteCard = ({
       >
         <Ionicons name="heart-dislike" size={22} color="#e32f45" />
       </TouchableOpacity>
-    </TouchableOpacity>
+    </View>
   );
 };
 
